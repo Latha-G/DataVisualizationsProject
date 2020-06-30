@@ -2,7 +2,6 @@ init();
 
 function init() {
 
-    // Feel free to change or delete any of the code you see in this editor!
     var svg = d3.select(".barChartRace").append("svg")
       .attr("width", 960)
       .attr("height", 600);
@@ -40,8 +39,6 @@ function init() {
      .html('Source: Dataset on Kaggle');
 
     let year = 1980;
-
-    // console.log(year);
     
     d3.json("/api/total-medals").then(function(data) { 
       
@@ -127,7 +124,7 @@ function init() {
 
           yearSlice.forEach((d,i) => d.rank = i);
     
-        //   console.log('IntervalYear: ', yearSlice);
+          console.log('IntervalYear: ', yearSlice);
 
           x.domain([0, d3.max(yearSlice, d => d.total_medals)]); 
     

@@ -236,7 +236,45 @@ def sport_medals_country(selected_sport):
     
     return jsonify(sport_countries)
 
+# Flask Route 7
+@app.route("/api/medals-tally/years_after_1960")
+def total_medal_tally_year_after_1960():
+    
+    """ 
+    Return the the total number of gold, silver, bronze and total medals won by all the countries after year 1960
+    """
+    subquery = db.session.query(Athletes.year, Athletes.season, Athletes.country, Athletes.event, Athletes.medal)\
+            .filter(Athletes.medal.isnot(None))\
+            .filter(Athletes.year >= 1960)\
+            .distinct()\
+            .subquery()
 
+    medals_query = db.session.query(subquery.c.year, subquery.c.season, subquery.c.country,\
+            (func.count(subquery.c.medal).label('total_medals')),\
+            func.count(subquery.c.medal).filter(subquery.c.medal == "Gold").label('gold_medals'),\
+            func.count(subquery.c.medal).filter(subquery.c.medal == "Silver").label('silver_medals'),\
+            func.count(subquery.c.medal).filter(subquery.c.medal == "Bronze").label('bronze_medals'))\
+            .group_by(subquery.c.year, subquery.c.season, subquery.c.country)\
+            .order_by(subquery.c.year,subquery.c.season,\
+                      desc('total_medals'))\
+            .all()
+    
+    all_medals = []
+
+    for year, season, country, total_medals, gold, silver, bronze in medals_query:
+
+        country_dict= {}
+
+        country_dict["Year"] = year
+        country_dict["Season"] = season
+        country_dict["Nation"] = country
+        country_dict["Medals"] = total_medals
+        country_dict["Gold"] = gold
+        country_dict["Silver"] = silver
+        country_dict["Bronze"] = bronze
+        all_medals.append(country_dict)
+
+    return jsonify(all_medals)
 
 if __name__ == '__main__':
     app.run()

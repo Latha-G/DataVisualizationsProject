@@ -348,28 +348,28 @@ select {
 }
 
 .list-group-item {
-  background-color:  rgb(250, 242, 242);
+  background-color:  rgb(236, 225, 225);;
 }
 
 .panel{
-  background-color:  rgb(250, 242, 242);
+  background-color:  rgb(236, 225, 225);;
 }
 .panel-heading {
-  background-color:rgb(41, 122, 189);
+  background-color:rgb(52, 129, 192);
 }
 .panel-footer {
-  background-color:rgba(25, 122, 201, 0.884);
+  background-color:rgb(52, 129, 192);
 }
 
 .panel-default>.panel-heading {
-  background-color: rgba(25, 122, 201, 0.884);
+  background-color: rgb(52, 129, 192);
   color: white;
   font-weight: 600;
 }
 
 .table-striped > tbody > tr:nth-child(odd) > td,
 .table-striped > tbody > tr:nth-child(odd) > th {
-background-color: rgba(245, 236, 236, 0.918);
+background-color: rgb(236, 225, 225);
 }
 
 table, .table {
