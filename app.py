@@ -263,7 +263,7 @@ def total_medal_tally_year_after_1960():
 
     for year, season, country, total_medals, gold, silver, bronze in medals_query:
 
-        country_dict= {}
+        '''country_dict= {}
 
         country_dict["Year"] = year
         country_dict["Season"] = season
@@ -271,9 +271,18 @@ def total_medal_tally_year_after_1960():
         country_dict["Medals"] = total_medals
         country_dict["Gold"] = gold
         country_dict["Silver"] = silver
-        country_dict["Bronze"] = bronze
-        all_medals.append(country_dict)
+        country_dict["Bronze"] = bronze'''
 
+        all_medals.append({ "Year" : year,
+                            "Season" : season, 
+                            "Nation" : country,
+                            "Medals" : total_medals,
+                            "Gold" : gold,
+                            "Silver" : silver, 
+                            'Bronze': bronze
+        })
+
+    print(all_medals)
     return jsonify(all_medals)
 
 if __name__ == '__main__':

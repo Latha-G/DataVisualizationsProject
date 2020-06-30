@@ -1,6 +1,13 @@
-/* ------------------------------------------------------ */
+var olympicsData;
 
-var olympicsData = data;
+/* ------------------------------------------------------ */
+d3.json('/api/medals-tally/years_after_1960').then(function(data) {
+
+console.log(data);
+
+olympicsData = JSON.parse(JSON.stringify(data, ['Year', 'Season', 'Nation', 'Medals', 'Gold', 'Silver', 'Bronze']));
+
+console.log(olympicsData);
 
 // Build the table using original data when page loads
 buildTable(olympicsData);
@@ -201,3 +208,4 @@ function filterTable() {
     });
 
 };
+});
